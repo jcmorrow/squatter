@@ -27,6 +27,11 @@ defmodule Squatter.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:floki, "~> 0.10.1"},
+      {:httpotion, "~> 3.0.0"},
+      {:mock, "~> 0.1.1", only: :test},
+      {:timex, "~> 3.0"},
+    ]
   end
 end
