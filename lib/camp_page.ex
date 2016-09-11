@@ -10,7 +10,9 @@ defmodule CampPage do
   end
 
   def available_sites(camp_ground_query_url) do
-    Floki.find(get_content(camp_ground_query_url), ".status a")
+    page = get_content(camp_ground_query_url)
+    IO.puts(Floki.text(page))
+    Floki.find(page, ".status a")
     |> Enum.map(&availability_from_link(&1))
   end
 

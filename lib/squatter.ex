@@ -1,11 +1,30 @@
 defmodule Squatter do
-  def refresh_campsites do
-    true
-    # get a list of all of the camps
-    # get new statuses for all sites at those camps
-    # store the new statuses
-  end
-
-  def camps do
+  def camps(query) do
+    query
+    |> CampGroundQuery.url_encoded
+    |> CampPage.available_sites
   end
 end
+
+HTTPotion.start
+
+queries = [
+  %CampGroundQuery{
+    camp_ground_slug: "Lower_Pines",
+    arrival_date: Timex.today,
+  },
+  %CampGroundQuery{
+    camp_ground_slug: "Lower_Pines",
+    arrival_date: Timex.today,
+    start_id: 25,
+  },
+  %CampGroundQuery{
+    camp_ground_slug: "Lower_Pines",
+    arrival_date: Timex.today,
+    start_id: 50,
+  },
+]
+
+queries
+|> Enum.map(&(Squatter.camps(&1)))
+|> IO.puts
