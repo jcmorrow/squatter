@@ -25,7 +25,7 @@ defmodule CampGroundQueryBuilderTest do
 
   test "for_ranges returns a set of queries for date and site ranges" do
     query = %CampGroundQuery{park_id: 12345}
-    queries = CampGroundQueryBuilder.for_ranges(
+    queries = CampGroundQueryBuilder.for_date_ranges(
       query,
       start_date: Timex.parse!("09/10/2016", "%m/%d/%Y", :strftime),
       end_date: Timex.parse!("09/24/2016", "%m/%d/%Y", :strftime),
@@ -33,5 +33,25 @@ defmodule CampGroundQueryBuilderTest do
 
     assert(hd(queries).park_id == 12345)
     assert(length(queries) == 2)
+  end
+
+  test "site_offsets" do
+    offsets = CampGroundQueryBuilder.site_offsets(105)
+
+    assert(offsets == [1, 25, 50, 75, 100])
+  end
+
+  test "for_ranges" do
+    query = %CampGroundQuery{park_id: 12345}
+    queries = CampGroundQueryBuilder.for_ranges(
+      query,
+      start_date: Timex.parse!("09/10/2016", "%m/%d/%Y", :strftime),
+      end_date: Timex.parse!("09/24/2016", "%m/%d/%Y", :strftime),
+      start_site: 1,
+      end_site: 105,
+    )
+
+    assert(length(queries) == 2 * 5)
+    IO.puts(inspect(queries))
   end
 end

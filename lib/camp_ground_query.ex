@@ -8,7 +8,7 @@ defmodule CampGroundQuery do
   def url_encoded(query) do
     Enum.join(
       [
-        "r/campsiteCalendar.do?page=calendar&search=site&contractCode=NRSO&",
+        "camping/r/campsiteCalendar.do?page=calendar&search=site&contractCode=NRSO&",
         "parkId=#{query.park_id}&",
         "calarvdate=#{formatted_arrival_date(query.arrival_date)}&",
         "startIdx=#{query.start_id}",

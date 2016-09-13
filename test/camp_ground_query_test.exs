@@ -9,6 +9,6 @@ defmodule CampGroundQueryTest do
       arrival_date: Timex.parse!("09/10/2016", "%m/%d/%Y", :strftime)
     }
 
-    assert(CampGroundQuery.url_encoded(query) == "r/campsiteCalendar.do?page=calendar&search=site&contractCode=NRSO&parkId=10&calarvdate=09/10/2016&startIdx=25")
+    assert(CampGroundQuery.url_encoded(query) == "camping/r/campsiteCalendar.do?page=calendar&search=site&contractCode=NRSO&parkId=10&calarvdate=09/10/2016&startIdx=25")
   end
 end

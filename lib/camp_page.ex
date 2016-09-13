@@ -1,5 +1,5 @@
 defmodule CampPage do
-  @base_url "http://www.recreation.gov/camping/"
+  @base_url "http://www.recreation.gov/"
 
   def base_url do
     @base_url
@@ -23,7 +23,6 @@ defmodule CampPage do
   def availability_from_link(html) do
     [detail_url] = Floki.attribute(html, "a", "href")
     [_match, date_string] = Regex.run(~r/arvdate=(.*)&/, detail_url)
-    IO.puts(date_string)
     %CampSiteAvailability{
       detail_url: detail_url,
       date: Timex.parse!(pad_leading_zero(date_string), "%m/%e/%Y", :strftime),
